@@ -1,0 +1,3 @@
+com\wynyard\webservice\IndexController.class
+com\wynyard\client\SolrJersyClient.class
+com\wynyard\client\JersySolrClient.class

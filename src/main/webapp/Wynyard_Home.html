@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="/Wynyard-POC/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/Wynyard-POC/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="/Wynyard-POC/js/search.js"></script>
+<style type="text/css" ></style>
+<title>Wynyard Search</title>
+<script type="text/javascript">
+</script>
+<style type="text/css">
+	#tfheader{
+		background-color:#282828;
+	}
+	#top{
+		background-color: #292929 ;
+	}
+	body
+	{
+	background-color:#D8D8D8;
+	}
+	.tftextinput{
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		border:1px solid #0076a3; border-right:0px;
+		border-top-left-radius: 5px 5px;
+		border-bottom-left-radius: 5px 5px;
+	}
+	#top{
+	text-align: center;
+	top: 50%;
+	}
+	
+	#selected_dataSources{
+		float:left;	
+		padding:20px;
+	}
+	
+	#selected_dataSources {
+	    position: absolute;
+	    margin-top: 130px;
+	    top: 19%;
+	    left: 1%;
+	}
+	
+	.tfbutton {
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		outline: none;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		color: #ffffff;
+		border: solid 1px #0076a3; border-right:0px;
+		background: #0095cd;
+		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+		border-top-right-radius: 5px 5px;
+		border-bottom-right-radius: 5px 5px;
+	}
+	.tfbutton:hover {
+		text-decoration: none;
+		background: #007ead;
+		background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+		background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+	}
+	/* Fixes submit button height problem in Firefox */
+	.tfbutton::-moz-focus-inner {
+	  border: 0;
+	}
+
+	table,td
+	{
+		border:3px solid black;
+	}
+	table
+	{
+		width:120%;
+	}
+	th
+	{
+		height:30px;
+		font-size:15px;
+		color:white;
+		background-color:#3366CC;
+	}
+	td{
+		height: 250px;
+	}
+</style>
+</head>
+<!-- <body onload="displaySearchData()"> -->
+
+
+<body onload="clearData()">
+
+<div id="top" style="clear:both;">
+		   <!--label><b>Wynyard Search</b> &nbsp;&nbsp;</label-->
+	<img src="/Wynyard-POC/image/Wynyard.jpg" alt="Wynyard logo" width="250" height="80" align="middle" >
+	       <input type="text" class="tftextinput" name="q" size="80" maxlength="" id="Search_Input"><button name="go" onclick="getSearchFromButton()" class="tfbutton">Search</button>
+</div>
+<!--div id="upright" style=" width: 20%; height:100% ;float: left; background: white;">
+	<div style="margin-top: 50px">
+		<label><b style="font-size: 16">DataSources</b></label><br>
+	</div>
+	<div id="selected_dataSources" style="margin-top: 20px">
+		<input type="checkbox" name="dataSourceArray[]" value="Investigator">Investigator<br>		
+		<input type="checkbox" name="dataSourceArray[]" value="OCG-Document">OCG<br>
+		<input type="checkbox" name="dataSourceArray[]" value="SharePoint">SharePoint<br>
+	</div> 
+</div-->
+
+<div id="selected_dataSources">
+	<table>
+	<tr>
+	<th>DataSource Filter</th>
+	</tr>	
+	<!--legend>Data Source</legend-->
+	<tr>
+	<td>
+	<input type="checkbox" name="dataSourceArray[]" value="Investigator">Investigator<br>
+	<br></br>
+	<input type="checkbox" name="dataSourceArray[]" value="OCG-Document">OCG<br>
+	<br></br>
+	<input type="checkbox" name="dataSourceArray[]" value="SharePoint">SharePoint<br>
+	</td>
+	</tr>
+	</table>
+</div>
+
+<div id=page_id style="margin-top: 20px;margin-left: 10px">
+	<div id="page_selection_id" style="margin-top: 20px;margin-left:20px">
+		<label><b style="font-size: 16">Number of Result:</b></label><br>		
+	<select id="page_no" style="margin-top: 10px;margin-left: 20px;width: 100px">
+	  <option value="10">10</option>
+	  <option value="50">50</option>
+	  <option value="100">100</option>
+	  <option value="150">150</option>
+	  <option value="200">200</option>
+	</select>
+	</div>	
+</div> 
+
+<div id="search_result" style="width: 80% ; height:100%; float:right">
+	<div id="search_header_div" style="margin-bottom: 20px">
+		<label id="docFoundId" style="color: red"></label>&nbsp;&nbsp;&nbsp;
+		<label id="respTimeId" style="color: red"></label>
+	</div>
+	<div id="search_details_div" style="margin-bottom: 40px">
+		<!-- <ul>
+			<li>Search Result 1</li>
+			<li>Search Result 2</li>
+			<li>Search Result 3</li>
+			<li>Search Result 4</li>
+			<li>Search Result 5</li>
+			<li>Search Result 6</li>
+		</ul> -->
+	</div>	
+</div>
+</body>
+</html>
